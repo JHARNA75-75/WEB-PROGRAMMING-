@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puku's Portfolio</title>
+
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --background: #f5f5ff;
+            --card: #ffffff;
+            --text: #25253a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 8%;
+            background: var(--card);
+            box-shadow: 0 2px 10px #00000015;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            color: var(--primary);
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 80vh;
+            padding: 140px 8% 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease;
+        }
+
+        header span {
+            color: var(--primary);
+        }
+
+        header p {
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px #6c63ff55;
+        }
+
+        /* Projects Section */
+        section {
+            padding: 60px 8%;
+            scroll-margin-top: 80px;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 75px;
+            background: var(--background);
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+        }
+
+        .project-card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #00000010;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px #00000020;
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .project-card::before {
+            content: "✦ ";
+            color: var(--primary);
+        }
+
+        /* About Section */
+        #about {
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Responsive Grid */
+        @media (min-width: 640px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Small Screen Navigation */
+        @media (max-width: 480px) {
+            nav {
+                padding: 12px 4%;
+            }
+
+            nav h2 {
+                font-size: 18px;
+            }
+
+            nav a {
+                margin-left: 8px;
+                font-size: 13px;
+            }
+
+            section {
+                padding: 45px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>Puku</h2>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <header id="home">
+        <h1>Hello, I'm <span>Puku</span>!</h1>
+        <p>
+            Welcome to my portfolio. I am a Computer Engineering student
+            who enjoys learning new skills and solving problems.
+        </p>
+        <a href="#projects" class="button">View My Projects</a>
+    </header>
+
+    <section id="projects">
+        <h2>My Skills & Projects</h2>
+
+        <div class="grid">
+            <div class="project-card">
+                <h3>Python</h3>
+                <p>I enjoy learning programming and writing Python code.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Communication</h3>
+                <p>I value teamwork and sharing ideas with others.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Problem Solving</h3>
+                <p>I enjoy analyzing problems and finding solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p><strong>Nickname:</strong> Puku</p>
+        <p><strong>Major:</strong> Computer Engineering</p>
+        <p><strong>Hobby:</strong> Drawing</p>
+    </section>
+
+    <footer>
+        <p>© 2026 Puku | Computer Engineering</p>
+    </footer>
+
+</body>
+</html>
