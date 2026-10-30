@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1 - Click Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        button {
+            padding: 12px 24px;
+            cursor: pointer;
+        }
+
+        .done {
+            background: #16a34a;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click Counter</h1>
+
+    <button id="clicker">Click me!</button>
+    <p>Count: <span id="count">0</span></p>
+    <p id="message">Keep clicking...</p>
+
+    <script>
+        const btn = document.querySelector('#clicker');
+        const countEl = document.querySelector('#count');
+        const messageEl = document.querySelector('#message');
+
+        let count = 0;
+
+        btn.addEventListener('click', function () {
+            count++;
+            countEl.textContent = count;
+
+            if (count >= 5) {
+                btn.classList.add('done');
+                messageEl.textContent = 'Great job! You clicked 5 times!';
+            }
+        });
+    </script>
+</body>
+</html>
