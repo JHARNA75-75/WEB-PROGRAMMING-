@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Georgia, serif;
+            background: #fffdfd;
+            color: #543653;
+            border-top: 5px solid #765477;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .counter-card {
+            position: relative;
+            width: min(90%, 560px);
+            padding: 55px 25px;
+            text-align: center;
+            background: #fbf6fc;
+            border: 2px solid #d9c5e8;
+            border-radius: 22px;
+            box-shadow: 0 12px 30px rgba(100, 65, 110, 0.10);
+        }
+
+        h1 {
+            font-size: clamp(32px, 7vw, 48px);
+            font-weight: normal;
+            margin: 0 0 38px;
+            color: #583858;
+        }
+
+        #count {
+            color: #482448;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        button {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(90, 50, 90, 0.15);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .add {
+            background: #dfb8d2;
+            color: #482448;
+        }
+
+        .subtract {
+            background: #e9ddf3;
+            color: #482448;
+        }
+
+        .reset {
+            background: #f6d8e2;
+            color: #482448;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 24px;
+            color: #b99ac7;
+        }
+
+        .flower.top {
+            top: 18px;
+            left: 20px;
+        }
+
+        .flower.bottom {
+            right: 20px;
+            bottom: 18px;
+        }
+
+        @media (max-width: 420px) {
+            .counter-card {
+                padding: 45px 15px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 12px 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="counter-card">
+        <span class="flower top">✿ ✦</span>
+
+        <h1>Counter: <span id="count">0</span></h1>
+
+        <div class="buttons">
+            <button class="add" id="add-btn">+ Add</button>
+            <button class="subtract" id="subtract-btn">− Subtract</button>
+            <button class="reset" id="reset-btn">Reset</button>
+        </div>
+
+        <span class="flower bottom">✦ ✿</span>
+    </main>
+
+    <script>
+        let count = 0;
+
+        const countDisplay = document.querySelector('#count');
+        const addButton = document.querySelector('#add-btn');
+        const subtractButton = document.querySelector('#subtract-btn');
+        const resetButton = document.querySelector('#reset-btn');
+
+        function updateCounter() {
+            countDisplay.textContent = count;
+        }
+
+        addButton.addEventListener('click', function () {
+            count++;
+            updateCounter();
+        });
+
+        subtractButton.addEventListener('click', function () {
+            count--;
+            updateCounter();
+        });
+
+        resetButton.addEventListener('click', function () {
+            count = 0;
+            updateCounter();
+        });
+    </script>
+</body>
+</html>

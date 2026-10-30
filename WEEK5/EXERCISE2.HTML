@@ -1,0 +1,243 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Georgia, "Times New Roman", serif;
+            background: #fffdfd;
+            color: #593b59;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            font-weight: normal;
+            color: #593b59;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 35px;
+            color: #765773;
+        }
+
+        .section {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto 28px;
+            padding: 30px;
+            background: #fcf7fc;
+            border: 2px solid #dfc5eb;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(89, 59, 89, 0.08);
+        }
+
+        .section::before {
+            content: "✿ ✦";
+            display: block;
+            color: #b795c7;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .section::after {
+            content: "✦ ✿";
+            display: block;
+            text-align: right;
+            color: #b795c7;
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 27px;
+            font-weight: normal;
+            color: #593b59;
+            margin: 0 0 20px;
+        }
+
+        p, label, .fruit {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .section > p {
+            text-align: center;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 12px auto;
+            padding: 12px 15px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            color: #593b59;
+            background: #fffdfd;
+            border: 1px solid #dfc5eb;
+            border-radius: 18px;
+        }
+
+        button {
+            display: block;
+            margin: 15px auto;
+            padding: 13px 25px;
+            border: none;
+            border-radius: 30px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 17px;
+            font-weight: bold;
+            color: #593b59;
+            background: #e1bad5;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            opacity: 0.85;
+        }
+
+        #change-btn {
+            background: #e1bad5;
+        }
+
+        #greet-btn {
+            background: #e9def3;
+        }
+
+        #check-btn {
+            background: #f6d9e2;
+        }
+
+        #run-btn {
+            background: #e9def3;
+        }
+
+        #result, #greeting, #score-result, #loop-result {
+            color: #593b59;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        #fruit-list {
+            text-align: center;
+        }
+
+        .fruit {
+            color: #593b59;
+        }
+
+        #saved-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #593b59;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 25px 14px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .section {
+                padding: 22px 16px;
+                border-radius: 23px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript Basics</h1>
+
+    <p class="subtitle">
+        Basic examples of JavaScript, conditions, and loops.
+    </p>
+
+    <div class="section">
+        <h2>Changing Content</h2>
+        <p id="change-text">Original text</p>
+        <button id="change-btn">Change Text</button>
+    </div>
+
+    <div class="section">
+        <h2>Reading User Input</h2>
+        <input id="name-input" type="text" placeholder="Your name">
+        <button id="greet-btn">Greet</button>
+        <p id="greeting"></p>
+    </div>
+
+    <div class="section">
+        <h2>Condition (if / else)</h2>
+        <p>Enter a score:</p>
+        <input id="score-input" type="number">
+        <button id="check-btn">Check</button>
+        <p id="score-result"></p>
+    </div>
+
+    <div class="section">
+        <h2>Loop (for)</h2>
+        <p>Enter a number:</p>
+        <input id="number-input" type="number" min="1">
+        <button id="run-btn">Run</button>
+        <p id="loop-result"></p>
+    </div>
+
+    <div class="section">
+        <h2>Loop Through an Array</h2>
+        <div id="fruit-list"></div>
+    </div>
+
+    <div class="section">
+        <h2>localStorage</h2>
+        <p id="saved-name"></p>
+    </div>
+
+    <script>
+        // Changing Content
+        document.querySelector('#change-btn')
+            .addEventListener('click', function () {
+                document.querySelector('#change-text').textContent =
+                    'The text has been changed!';
+            });
+
+        // Reading User Input
+        document.querySelector('#greet-btn')
+            .addEventListener('click', function () {
+                const name = document.querySelector('#name-input')
+                    .value.trim();
+
+                document.querySelector('#greeting').textContent =
+                    name ? 'Hello, ' + name + '!' :
+                    'Please enter your name.';
+            });
+
+        // Condition (if / else)
+        document.querySelector('#check-btn')
+            .addEventListener('click', function () {
+                const scoreInput =
+                    document.querySelector('#score-input');
+                const
