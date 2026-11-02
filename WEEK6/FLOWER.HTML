@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Lookup ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    padding: 35px 20px;
+    background: #fffcfe;
+    color: #593c59;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position: relative;
+    max-width: 850px;
+    margin: auto;
+    padding: 45px 35px;
+    background: #fbf5fc;
+    border: 2px solid #dfc4ed;
+    border-radius: 28px;
+    box-shadow: 0 18px 45px rgba(112,69,115,.10);
+}
+
+.decoration {
+    position: absolute;
+    color: #bb91c9;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+.top-left { top: 15px; left: 20px; }
+.bottom-right { bottom: 15px; right: 20px; }
+
+h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(36px, 6vw, 48px);
+    font-weight: 400;
+    color: #593c59;
+    margin-bottom: 10px;
+}
+
+h1 span { color: #cf9ec6; }
+
+.subtitle {
+    color: #92788f;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px;
+    border: 2px solid #dfc4ed;
+    border-radius: 17px;
+    outline: none;
+    background: #fffafd;
+    color: #593c59;
+    font: inherit;
+}
+
+input:focus {
+    border-color: #bd91c9;
+    box-shadow: 0 0 0 4px #eadcf2;
+}
+
+button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 25px;
+    background: #e3b9d6;
+    color: #583651;
+    font: 600 15px 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: .25s;
+}
+
+button:hover {
+    background: #d5a6ca;
+    transform: translateY(-2px);
+}
+
+.message {
+    margin: 18px 0;
+    color: #92788f;
+    font-size: 14px;
+}
+
+.flower-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.flower-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 22px;
+    background: #fffafd;
+    border: 1.5px solid #e2cdeb;
+    border-radius: 22px;
+    box-shadow: 0 5px 18px rgba(112,69,115,.05);
+    transition: .25s;
+}
+
+.flower-card:hover {
+    transform: translateY(-3px);
+    border-color: #d3addf;
+    box-shadow: 0 10px 24px rgba(112,69,115,.10);
+}
+
+.flower-image {
+    width: 210px;
+    height: 210px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 18px;
+    background: #f0e1f5;
+}
+
+.image-fallback {
+    width: 210px;
+    height: 210px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0e1f5;
+    border-radius: 18px;
+    font-size: 85px;
+}
+
+.flower-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.flower-info h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(25px, 4vw, 34px);
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: #593c59;
+}
+
+.scientific {
+    font-style: italic;
+    color: #a17ca7;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.flower-info p {
+    color: #826580;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 7px;
+}
+
+.label {
+    color: #b181b5;
+    font-weight: 600;
+}
+
+.tag {
+    display: inline-block;
+    padding: 6px 13px;
+    margin-top: 8px;
+    border-radius: 20px;
+    background: #f0e1f5;
+    color: #805d85;
+    font-size: 12px;
+}
+
+footer {
+    margin-top: 24px;
+    text-align: center;
+    color: #b49bb1;
+    font-size: 12px;
+}
+
+@media (max-width: 550px) {
+    body { padding: 18px 12px; }
+
+    .container { padding: 45px 18px; }
+
+    .search-box { flex-direction: column; }
+
+    .search-box button { width: 100%; }
+
+    .flower-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 18px;
+    }
+
+    .flower-image,
+    .image-fallback {
+        width: 100%;
+        height: 230px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+    <span class="decoration top-left">✿ ✦</span>
+
+    <h1>Flower Lookup <span>♡</span></h1>
+    <p class="subtitle">
+        Discover beautiful flowers and their little stories ✨
+    </p>
+
+    <form class="search-box" id="search-form">
+        <input
+            type="text"
+            id="flower-input"
+            placeholder="Try rose, tulip, sunflower..."
+            value="rose"
+            aria-label="Flower name"
+            required
+        >
+        <button type="submit">✦ Search</button>
+    </form>
+
+    <p class="message" id="message"></p>
+    <section class="flower-list" id="results"></section>
+
+    <span class="decoration bottom-right">✦ ❀</span>
+</main>
+
+<footer>Made with ♡ and a little bit of nature</footer>
+
+<script>
+const flowers = [
+    {
+        name: "Rose",
+        scientific: "Rosa",
+        color: "Red, pink, white, yellow",
+        meaning: "Love, beauty and friendship",
+        description: "A timeless flower known for its layered petals and fragrance.",
+        emoji: "🌹",
+        image: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Sunflower",
+        scientific: "Helianthus annuus",
+        color: "Yellow",
+        meaning: "Happiness, warmth and hope",
+        description: "A bright flower with golden petals and a large central disk.",
+        emoji: "🌻",
+        image: "https://images.unsplash.com/photo-1597848212624-e6f1a2a5c7b0?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Tulip",
+        scientific: "Tulipa",
+        color: "Pink, red, yellow, purple",
+        meaning: "Love and new beginnings",
+        description: "An elegant spring flower with smooth, cup-shaped petals.",
+        emoji: "🌷",
+        image: "https://images.unsplash.com/photo-1520763185298-1b434c919102?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Lotus",
+        scientific: "Nelumbo nucifera",
+        color: "Pink, white",
+        meaning: "Peace, purity and renewal",
+        description: "An aquatic flower that blooms beautifully above the water.",
+        emoji: "🪷",
+        image: "https://images.unsplash.com/photo-1562678776-0d6f8e8f6d5e?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Lily",
+        scientific: "Lilium",
+        color: "White, pink, orange, yellow",
+        meaning: "Grace, purity and devotion",
+        description: "A striking flower with elegant petals.",
+        emoji: "百",
+        image: "https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Orchid",
+        scientific: "Orchidaceae",
+        color: "Purple, white, pink, yellow",
+        meaning: "Beauty, elegance and strength",
+        description: "An elegant flower family with distinctive shapes.",
+        emoji: "🌸",
+        image: "https://images.unsplash.com/photo-1566907225472-514a2b8a9f54?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Daisy",
+        scientific: "Bellis perennis",
+        color: "White, yellow, pink",
+        meaning: "Innocence, joy and simplicity",
+        description: "A cheerful flower with a bright center and delicate petals.",
+        emoji: "🌼",
+        image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Lavender",
+        scientific: "Lavandula",
+        color: "Purple, violet",
+        meaning: "Calm, peace and devotion",
+        description: "A fragrant purple flowering plant often found in gardens.",
+        emoji: "💜",
+        image: "https://images.unsplash.com/photo-1499002238440-d264edd596ec?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Cherry Blossom",
+        scientific: "Prunus serrulata",
+        color: "Pink, white",
+        meaning: "Renewal and the beauty of life",
+        description: "A delicate blossom associated with spring.",
+        emoji: "🌸",
+        image: "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Marigold",
+        scientific: "Tagetes",
+        color: "Orange, yellow",
+        meaning: "Warmth, creativity and celebration",
+        description: "A vivid flower with golden or orange petals.",
+        emoji: "🌼",
+        image: "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Hibiscus",
+        scientific: "Hibiscus rosa-sinensis",
+        color: "Red, pink, yellow, white",
+        meaning: "Beauty and happiness",
+        description: "A tropical flower with large, colorful petals.",
+        emoji: "🌺",
+        image: "https://images.unsplash.com/photo-1597055181300-d7b3d7c9f8a5?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Jasmine",
+        scientific: "Jasminum",
+        color: "White, yellow",
+        meaning: "Love, grace and purity",
+        description: "A delicate flower famous for its sweet fragrance.",
+        emoji: "🤍",
+        image: "https://images.unsplash.com/photo-1596438459194-f275f413d6ff?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Peony",
+        scientific: "Paeonia",
+        color: "Pink, white, red",
+        meaning: "Romance, prosperity and honor",
+        description: "A full flower with many soft, layered petals.",
+        emoji: "🌸",
+        image: "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&auto=format&fit=crop"
+    },
+    {
+        name: "Daffodil",
+        scientific: "Narcissus",
+        color: "Yellow, white",
+        meaning: "Hope and new beginnings",
+        description: "A spring flower with a trumpet-shaped center.",
+        emoji: "🌼",
+        image: "https://images.unsplash.com/photo-1582972236019-ea4af5ffe587?w=600&auto=format&fit=crop"
+    }
+];
+
+const form = document.getElementById("search-form");
+const input = document.getElementById("flower-input");
+const results = document.getElementById("results");
+const message = document.getElementById("message");
+
+function addText(parent, label, value) {
+    const p = document.createElement("p");
+    const strong = document.createElement("span");
+    strong.className = "label";
+    strong.textContent = label + ": ";
+    p.append(strong, document.createTextNode(value));
+    parent.appendChild(p);
+}
+
+function createCard(flower) {
+    const card = document.createElement("article");
+    card.className = "flower-card";
+
+    const image = document.createElement("img");
+    image.className = "flower-image";
+    image.alt = flower.name;
+    image.loading = "lazy";
+
+    const fallback = document.createElement("div");
+    fallback.className = "image-fallback";
+    fallback.textContent = flower.emoji;
+
+    image.onerror = () => {
+        image.replaceWith(fallback);
+    };
+
+    image.src = flower.image;
+
+    const info = document.createElement("div");
+    info.className = "flower-info";
+
+    const title = document.createElement("h2");
+    title.textContent = flower.name;
+
+    const scientific = document.createElement("div");
+    scientific.className = "scientific";
+    scientific.textContent = flower.scientific;
+
+    const description = document.createElement("p");
+    description.textContent = flower.description;
+
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = "Bloom with love ✿";
+
+    info.append(title, scientific);
+    addText(info, "Colors", flower.color);
+    addText(info, "Meaning", flower.meaning);
+    info.append(description, tag);
+
+    card.append(image, info);
+    results.appendChild(card);
+}
+
+function searchFlowers(event) {
+    if (event) event.preventDefault();
+
+    const query = input.value.trim().toLowerCase();
+    results.replaceChildren();
+
+    if (!query) {
+        message.textContent = "Please enter a flower name ♡";
+        return;
+    }
+
+    const matches = flowers.filter(flower =>
+        flower.name.toLowerCase().includes(query) ||
+        flower.scientific.toLowerCase().includes(query) ||
+        flower.color.toLowerCase().includes(query)
+    );
+
+    if (!matches.length) {
+        message.textContent = "No flower found ♡ Try rose, tulip, lotus or lavender.";
+        return;
+    }
+
+    message.textContent =
+        `Found ${matches.length} beautiful ${matches.length === 1 ? "flower" : "flowers"} ♡`;
+
+    matches.forEach(createCard);
+}
+
+form.addEventListener("submit", searchFlowers);
+searchFlowers();
+</script>
+
+</body>
+</html>

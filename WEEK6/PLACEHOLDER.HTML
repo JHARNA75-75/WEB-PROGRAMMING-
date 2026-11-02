@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posts ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    padding: 35px 20px;
+    background: #fffcfe;
+    color: #593c59;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position: relative;
+    max-width: 950px;
+    margin: auto;
+    padding: 45px 35px;
+    background: #fbf5fc;
+    border: 2px solid #dfc4ed;
+    border-radius: 28px;
+    box-shadow: 0 18px 45px #70457515;
+}
+
+.decoration {
+    position: absolute;
+    color: #bb91c9;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+.top-left {
+    top: 12px;
+    left: 20px;
+}
+
+.bottom-right {
+    right: 20px;
+    bottom: 12px;
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(36px, 6vw, 48px);
+    font-weight: 400;
+}
+
+h1 span {
+    color: #cf9ec6;
+}
+
+.subtitle {
+    margin-bottom: 25px;
+    color: #92788f;
+    font-size: 14px;
+}
+
+.status {
+    margin: 20px 0;
+    color: #92788f;
+    font-size: 14px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.post {
+    padding: 20px;
+    background: #fffafd;
+    border: 1.5px solid #e2cdeb;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.post:hover {
+    transform: translateY(-2px);
+    border-color: #d3addf;
+    box-shadow: 0 8px 20px #70457512;
+}
+
+.post-number {
+    margin-bottom: 7px;
+    color: #b181b5;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.post h2 {
+    margin-bottom: 9px;
+    color: #593c59;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.post p {
+    color: #826580;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 22px;
+    background: #e3b9d6;
+    color: #583651;
+    font: 600 15px 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d5a6ca;
+}
+
+button:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+footer {
+    margin-top: 25px;
+    color: #b49bb1;
+    font-size: 12px;
+    text-align: center;
+}
+
+@media (max-width: 550px) {
+    body {
+        padding: 18px 12px;
+    }
+
+    .container {
+        padding: 45px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+    <span class="decoration top-left">✿ ✦</span>
+
+    <h1>Posts <span>♡</span></h1>
+
+    <p class="subtitle">
+        Little stories, ideas, and inspiration ✨
+    </p>
+
+    <p class="status" id="status" aria-live="polite">
+        Welcome! Loading your posts...
+    </p>
+
+    <section class="posts" id="posts"></section>
+
+    <button id="load-button" type="button">
+        ✦ Load more posts
+    </button>
+
+    <span class="decoration bottom-right">✦ ❀</span>
+
+</main>
+
+<footer>Made with ♡ and a little creativity</footer>
+
+<script>
+(function () {
+    const postsContainer = document.getElementById("posts");
+    const statusElement = document.getElementById("status");
+    const loadButton = document.getElementById("load-button");
+
+    const posts = [
+        {
+            title: "The Importance of Friendship",
+            body: "True friends support us during difficult times, celebrate our achievements, and make our lives happier. Good friendship is built on trust, honesty, and respect."
+        },
+        {
+            title: "Why Reading Is Important",
+            body: "Reading helps us learn new things, improve our vocabulary, and develop our imagination. Reading a few pages every day can help us become better learners."
+        },
+        {
+            title: "Protecting Our Environment",
+            body: "We can protect the environment by reducing plastic waste, saving water, planting trees, and recycling. Small actions can make a big difference."
+        },
+        {
+            title: "The Benefits of Exercise",
+            body: "Regular exercise keeps our bodies strong and helps us feel energetic. Walking, cycling, dancing, and playing sports are enjoyable ways to stay active."
+        },
+        {
+            title: "The Value of Education",
+            body: "Education gives people knowledge, skills, and opportunities to build a better future. Learning helps us understand the world and make thoughtful decisions."
+        },
+        {
+            title: "A Healthy Lifestyle",
+            body: "Eating balanced meals, drinking enough water, getting sufficient sleep, and staying active are important parts of a healthy lifestyle."
+        },
+        {
+            title: "Learning a New Language",
+            body: "Learning another language helps us communicate with more people and understand different cultures. Practising a little every day gradually improves our confidence."
+        },
+        {
+            title: "The Beauty of Nature",
+            body: "Nature brings beauty and peace into our lives. Flowers, forests, rivers, and mountains remind us why protecting our planet is important."
+        },
+        {
+            title: "Using Technology Wisely",
+            body: "Technology makes communication and learning easier, but balance is important. Taking breaks from screens can help improve our daily lives."
+        },
+        {
+            title: "Never Stop Learning",
+            body: "Every day gives us an opportunity to learn something new. Mistakes are part of the process, and patience helps us grow through challenges."
+        },
+        {
+            title: "The Power of Kindness",
+            body: "A small act of kindness can brighten someone's day. Listening carefully, offering help, and treating others with respect can make our communities more caring."
+        },
+        {
+            title: "Managing Your Time",
+            body: "Making a simple daily plan helps us finish important tasks and reduce stress. Setting priorities and taking short breaks can make studying easier."
+        },
+        {
+            title: "The Joy of Travelling",
+            body: "Travelling allows us to discover new places, try different foods, and learn about other cultures. It can create wonderful memories and broaden our understanding of the world."
+        },
+        {
+            title: "Building Self-Confidence",
+            body: "Self-confidence grows when we practise, learn from mistakes, and recognise our progress. We do not have to be perfect to be proud of ourselves."
+        },
+        {
+            title: "Why Sleep Matters",
+            body: "Getting enough sleep helps our bodies recover and supports memory, concentration, and mood. A consistent sleep routine can make daily activities easier."
+        }
+    ];
+
+    let currentIndex = 0;
+    const postsPerLoad = 5;
+
+    function loadPosts() {
+        const nextPosts = posts.slice(
+            currentIndex,
+            currentIndex + postsPerLoad
+        );
+
+        nextPosts.forEach(function (post, index) {
+            const article = document.createElement("article");
+            article.className = "post";
+
+            const number = document.createElement("div");
+            number.className = "post-number";
+            number.textContent = "POST #" + (currentIndex + index + 1);
+
+            const title = document.createElement("h2");
+            title.textContent = post.title;
+
+            const body = document.createElement("p");
+            body.textContent = post.body;
+
+            article.appendChild(number);
+            article.appendChild(title);
+            article.appendChild(body);
+
+            postsContainer.appendChild(article);
+        });
+
+        currentIndex += nextPosts.length;
+
+        statusElement.textContent =
+            "Showing " + currentIndex + " of " + posts.length +
+            " English posts ♡";
+
+        if (currentIndex >= posts.length) {
+            loadButton.textContent = "You've seen all posts ✿";
+            loadButton.disabled = true;
+        }
+    }
+
+    loadButton.addEventListener("click", loadPosts);
+
+    loadPosts();
+})();
+</script>
+
+</body>
+</html>
