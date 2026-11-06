@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Search ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: #fffcfe;
+    color: #593c59;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    position: relative;
+    padding: 48px 20px 35px;
+    text-align: center;
+    background: #fbf5fc;
+    border-bottom: 2px solid #dfc4ed;
+}
+
+.decoration {
+    position: absolute;
+    color: #bb91c9;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+.top-left {
+    top: 12px;
+    left: 20px;
+}
+
+header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(36px, 6vw, 48px);
+    font-weight: 400;
+}
+
+header h1 span {
+    color: #cf9ec6;
+}
+
+header p {
+    margin-top: 10px;
+    color: #92788f;
+    font-size: 15px;
+}
+
+.search-area {
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 0 22px;
+}
+
+.search-form {
+    display: flex;
+    gap: 12px;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 18px;
+    border: 2px solid #dfc4ed;
+    border-radius: 17px;
+    outline: none;
+    background: #fffafd;
+    color: #593c59;
+    font: inherit;
+}
+
+input::placeholder {
+    color: #b49bb1;
+}
+
+input:focus {
+    border-color: #bd91c9;
+    box-shadow: 0 0 0 4px #eadcf2;
+}
+
+button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 20px;
+    background: #e3b9d6;
+    color: #583651;
+    font: 600 15px 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    background: #d5a6ca;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: .65;
+    cursor: wait;
+    transform: none;
+}
+
+.hint {
+    margin-top: 15px;
+    color: #92788f;
+    font-size: 14px;
+}
+
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 22px 40px;
+}
+
+.results-heading {
+    margin-bottom: 22px;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.results-heading span {
+    color: #cf9ec6;
+}
+
+.status {
+    margin-bottom: 22px;
+    color: #92788f;
+    font-size: 14px;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.book-card {
+    overflow: hidden;
+    padding: 18px;
+    background: #fbf5fc;
+    border: 1.5px solid #e2cdeb;
+    border-radius: 22px;
+    box-shadow: 0 6px 20px #7045750c;
+    transition: .25s;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    border-color: #d3addf;
+    box-shadow: 0 12px 25px #70457515;
+}
+
+.cover-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 230px;
+    margin-bottom: 18px;
+    padding: 10px;
+    border-radius: 16px;
+    background: #f0e1f5;
+}
+
+.book-cover {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.no-cover {
+    color: #a17ca7;
+    text-align: center;
+    font-size: 45px;
+}
+
+.book-card h3 {
+    margin-bottom: 10px;
+    color: #593c59;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.book-card p {
+    margin-bottom: 7px;
+    color: #826580;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.book-card .label {
+    color: #b181b5;
+    font-weight: 600;
+}
+
+.book-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 9px 15px;
+    border-radius: 18px;
+    background: #f0e1f5;
+    color: #805d85;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.book-link:hover {
+    background: #e3b9d6;
+}
+
+.load-more {
+    display: block;
+    margin: 28px auto 0;
+}
+
+footer {
+    padding: 25px 15px;
+    color: #b49bb1;
+    text-align: center;
+    font-size: 12px;
+}
+
+@media (max-width: 500px) {
+    header {
+        padding: 48px 15px 30px;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
+
+    .book-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .book-card {
+        padding: 12px;
+    }
+
+    .cover-wrap {
+        height: 180px;
+    }
+}
+
+@media (max-width: 340px) {
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <span class="decoration top-left">✿ ✦</span>
+    <h1>Book Search <span>♡</span></h1>
+    <p>Discover your next favorite book ✨</p>
+</header>
+
+<section class="search-area">
+    <form class="search-form" id="search-form">
+        <input
+            id="search-input"
+            type="search"
+            placeholder="Search books by title or author..."
+            aria-label="Search books"
+            required
+        >
+        <button id="search-button" type="submit">✦ Search</button>
+    </form>
+
+    <p class="hint">Find books, explore authors, and discover new stories.</p>
+</section>
+
+<main>
+    <h2 class="results-heading">Results <span>♡</span></h2>
+    <p class="status" id="status" aria-live="polite">
+        Search for a book or author to get started.
+    </p>
+
+    <section class="book-grid" id="book-results"></section>
+
+    <button class="load-more" id="load-more" hidden>
+        ✦ Load more books
+    </button>
+</main>
+
+<footer>Made with ♡ and a love for books</footer>
+
+<script>
+const form = document.getElementById("search-form");
+const input = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+const results = document.getElementById("book-results");
+const statusText = document.getElementById("status");
+const loadMoreButton = document.getElementById("load-more");
+
+let currentQuery = "";
+let currentPage = 1;
+let isLoading = false;
+let totalBooks = 0;
+
+async function searchBooks(newSearch = true) {
+    if (isLoading) return;
+
+    if (newSearch) {
+        currentQuery = input.value.trim();
+        currentPage = 1;
+        results.replaceChildren();
+        loadMoreButton.hidden = true;
+    }
+
+    if (!currentQuery) {
+        statusText.textContent = "Please enter a book title or author ♡";
+        return;
+    }
+
+    isLoading = true;
+    searchButton.disabled = true;
+    loadMoreButton.disabled = true;
+    searchButton.textContent = "Searching...";
+
+    statusText.textContent = "Finding beautiful books for you... ✨";
+
+    try {
+        const url =
+            "https://openlibrary.org/search.json?q=" +
+            encodeURIComponent(currentQuery) +
+            "&page=" + currentPage +
+            "&limit=12";
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Book search failed");
+        }
+
+        const data = await response.json();
+        const books = data.docs || [];
+
+        totalBooks = data.numFound || 0;
+
+        if (currentPage === 1 && books.length === 0) {
+            statusText.textContent =
+                "No books found. Try another title or author ♡";
+            return;
+        }
+
+        books.forEach(createBookCard);
+
+        const shown = results.children.length;
+
+        statusText.textContent =
+            `Showing ${shown} books out of ${totalBooks.toLocaleString()} results ♡`;
+
+        currentPage++;
+
+        loadMoreButton.hidden = shown >= totalBooks || books.length === 0;
+
+    } catch (error) {
+        statusText.textContent =
+            "We couldn't load the books. Please check your internet and try again ♡";
+
+        if (results.children.length > 0) {
+            loadMoreButton.hidden = false;
+        }
+    } finally {
+        isLoading = false;
+        searchButton.disabled = false;
+        loadMoreButton.disabled = false;
+        searchButton.textContent = "✦ Search";
+    }
+}
+
+function createBookCard(book) {
+    const card = document.createElement("article");
+    card.className = "book-card";
+
+    const coverWrap = document.createElement("div");
+    coverWrap.className = "cover-wrap";
+
+    if (book.cover_i) {
+        const cover = document.createElement("img");
+        cover.className = "book-cover";
+        cover.alt = "Cover of " + (book.title || "book");
+        cover.loading = "lazy";
+
+        cover.onerror = function() {
+            cover.remove();
+            const placeholder = document.createElement("div");
+            placeholder.className = "no-cover";
+            placeholder.textContent = "📚";
+            coverWrap.appendChild(placeholder);
+        };
+
+        cover.src =
+            "https://covers.openlibrary.org/b/id/" +
+            book.cover_i + "-M.jpg";
+        coverWrap.appendChild(cover);
+    } else {
+        const placeholder = document.createElement("div");
+        placeholder.className = "no-cover";
+        placeholder.textContent = "📚";
+        coverWrap.appendChild(placeholder);
+    }
+
+    const title = document.createElement("h3");
+    title.textContent = book.title || "Untitled";
+
+    const author = document.createElement("p");
+    const authorLabel = document.createElement("span");
+    authorLabel.className = "label";
+    authorLabel.textContent = "Author: ";
+    author.appendChild(authorLabel);
+    author.appendChild(
+        document.createTextNode(
+            (book.author_name || ["Unknown author"]).slice(0, 2).join(", ")
+        )
+    );
+
+    const year = document.createElement("p");
+    const yearLabel = document.createElement("span");
+    yearLabel.className = "label";
+    yearLabel.textContent = "Published: ";
+    year.appendChild(yearLabel);
+    year.appendChild(
+        document.createTextNode(book.first_publish_year || "Unknown")
+    );
+
+    const link = document.createElement("a");
+    link.className = "book-link";
+    link.href = book.key
+        ? "https://openlibrary.org" + book.key
+        : "https://openlibrary.org";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Explore book ↗";
+
+    card.append(coverWrap, title, author, year, link);
+    results.appendChild(card);
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    searchBooks(true);
+});
+
+loadMoreButton.addEventListener("click", function() {
+    searchBooks(false);
+});
+</script>
+
+</body>
+</html>
