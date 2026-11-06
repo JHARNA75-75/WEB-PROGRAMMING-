@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gachon Registration ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 35px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fffcfe;
+    color: #593c59;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    max-width: 590px;
+    padding: 40px 35px;
+    background: #fbf5fc;
+    border: 2px solid #dfc4ed;
+    border-radius: 28px;
+    box-shadow: 0 18px 45px #70457515;
+}
+
+.decor {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    color: #bb91c9;
+    font-size: 24px;
+}
+
+h1 {
+    margin: 0 0 30px;
+    font: 400 36px 'DM Serif Display', Georgia, serif;
+}
+
+h1 span { color: #cf9ec6; }
+
+.group { margin-bottom: 20px; }
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #704f70;
+}
+
+input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 2px solid #dfc4ed;
+    border-radius: 14px;
+    background: #fffafd;
+    color: #593c59;
+    font: inherit;
+    outline: none;
+}
+
+input:focus {
+    border-color: #bd91c9;
+    box-shadow: 0 0 0 4px #eadcf2;
+}
+
+button {
+    padding: 13px 24px;
+    border: none;
+    border-radius: 18px;
+    background: #e3b9d6;
+    color: #583651;
+    font: 600 15px 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+button:hover { background: #d5a6ca; }
+
+.message {
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f0e1f5;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.signin {
+    margin-top: 22px;
+    font-size: 13px;
+    color: #92788f;
+}
+
+a { color: #96669e; font-weight: 600; }
+
+@media (max-width: 450px) {
+    .card { padding: 38px 22px; }
+}
+</style>
+</head>
+<body>
+
+<main class="card">
+    <span class="decor">✿ ✦</span>
+    <h1>Gachon Registration <span>♡</span></h1>
+
+    <form id="registerForm">
+        <div class="group">
+            <label for="studentId">Student ID</label>
+            <input id="studentId" type="text"
+                   placeholder="Enter your student ID"
+                   pattern="[0-9]+" required>
+        </div>
+
+        <div class="group">
+            <label for="email">Email Address</label>
+            <input id="email" type="email"
+                   placeholder="name@gachon.ac.kr" required>
+        </div>
+
+        <div class="group">
+            <label for="password">Password (min 8 characters)</label>
+            <input id="password" type="password"
+                   placeholder="At least 8 characters"
+                   minlength="8" required>
+        </div>
+
+        <div class="group">
+            <label for="age">Age (18–65)</label>
+            <input id="age" type="number"
+                   placeholder="Enter your age"
+                   min="18" max="65" step="1" required>
+        </div>
+
+        <button type="submit">✿ Register</button>
+        <div id="message" class="message" hidden></div>
+    </form>
+
+    <p class="signin">
+        Already have an account?
+        <a href="signin.html">Sign in here</a>
+    </p>
+</main>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const studentId = document.getElementById("studentId").value.trim();
+    const age = Number(document.getElementById("age").value);
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    message.hidden = false;
+
+    if (!/^[0-9]+$/.test(studentId)) {
+        message.textContent = "Please enter a valid numeric student ID.";
+    } else if (password.length < 8) {
+        message.textContent = "Your password must be at least 8 characters.";
+    } else if (!Number.isInteger(age) || age < 18 || age > 65) {
+        message.textContent = "Age must be a whole number from 18 to 65.";
+    } else {
+        message.textContent =
+            "Registration form validated successfully ♡ This demo does not save your registration.";
+    }
+});
+</script>
+
+</body>
+</html>

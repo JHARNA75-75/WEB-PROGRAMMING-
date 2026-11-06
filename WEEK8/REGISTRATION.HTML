@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    padding: 35px 18px;
+    background: #fffcfe;
+    color: #593c59;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position: relative;
+    max-width: 850px;
+    margin: auto;
+    padding: 40px;
+    background: #fbf5fc;
+    border: 2px solid #dfc4ed;
+    border-radius: 28px;
+    box-shadow: 0 18px 45px rgba(112,69,115,.10);
+}
+
+.decoration {
+    position: absolute;
+    color: #bb91c9;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+.top-left {
+    top: 13px;
+    right: 20px;
+}
+
+h1 {
+    text-align: center;
+    font: 400 clamp(32px, 5vw, 43px) 'DM Serif Display', Georgia, serif;
+    margin-bottom: 10px;
+}
+
+h1 span {
+    color: #cf9ec6;
+}
+
+.subtitle {
+    text-align: center;
+    color: #92788f;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
+
+fieldset {
+    border: 1.5px solid #dfc4ed;
+    border-radius: 19px;
+    padding: 25px 22px;
+    margin-bottom: 25px;
+    min-width: 0;
+    background: #fffafd;
+}
+
+legend {
+    padding: 0 10px;
+    color: #805d85;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #704f70;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input:not([type="checkbox"]):not([type="range"]),
+select {
+    display: block;
+    width: 100%;
+    min-height: 49px;
+    padding: 12px 15px;
+    border: 2px solid #dfc4ed;
+    border-radius: 13px;
+    background: #fffafd;
+    color: #593c59;
+    font: 14px 'Poppins', sans-serif;
+    outline: none;
+    transition: .2s;
+}
+
+input::placeholder {
+    color: #b49bb1;
+}
+
+input:focus,
+select:focus {
+    border-color: #bd91c9;
+    box-shadow: 0 0 0 4px #eadcf2;
+}
+
+input:invalid:not(:placeholder-shown) {
+    border-color: #dc91b0;
+}
+
+input[type="date"] {
+    color-scheme: light;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #bd91c9;
+    cursor: pointer;
+}
+
+.hint {
+    display: block;
+    margin-top: 7px;
+    color: #a187a0;
+    font-size: 12px;
+}
+
+.experience-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.experience-row input {
+    flex: 1;
+    min-width: 0;
+}
+
+.experience-value {
+    min-width: 85px;
+    padding: 10px;
+    border-radius: 13px;
+    background: #f0e1f5;
+    color: #805d85;
+    text-align: center;
+    font-weight: 600;
+}
+
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin: 10px 0 25px;
+}
+
+.terms input {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: #bd91c9;
+    flex-shrink: 0;
+}
+
+.terms label {
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background: #e3b9d6;
+    color: #583651;
+    font: 600 16px 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    background: #d5a6ca;
+    transform: translateY(-2px);
+}
+
+.message {
+    margin-top: 20px;
+    padding: 14px;
+    border: 1px solid #dfc4ed;
+    border-radius: 14px;
+    background: #f0e1f5;
+    color: #704f70;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.message:empty {
+    display: none;
+}
+
+footer {
+    margin-top: 25px;
+    color: #b49bb1;
+    font-size: 12px;
+    text-align: center;
+}
+
+@media (max-width: 550px) {
+    body {
+        padding: 15px 10px;
+    }
+
+    .container {
+        padding: 35px 18px;
+    }
+
+    fieldset {
+        padding: 22px 15px;
+    }
+
+    .experience-row {
+        gap: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <span class="decoration top-left">✿ ✦</span>
+
+    <h1>Student Registration <span>♡</span></h1>
+    <p class="subtitle">Fill in your information to register ✨</p>
+
+    <form id="registrationForm">
+
+        <fieldset>
+            <legend>Personal Info</legend>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="studentId">Student ID</label>
+                <input
+                    type="text"
+                    id="studentId"
+                    placeholder="202112345"
+                    pattern="[0-9]+"
+                    title="Enter your numeric student ID"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input
+                    type="date"
+                    id="dob"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="major">Major</label>
+                <select id="major" required>
+                    <option value="">Select your major</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Business Administration">Business Administration</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Nursing">Nursing</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Info</legend>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="name@example.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="At least 8 characters"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
+                <span class="hint">Password must contain at least 8 characters.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="010-1234-5678"
+                    pattern="010-[0-9]{4}-[0-9]{4}"
+                    title="Use the format 010-1234-5678"
+                    required
+                >
+                <span class="hint">Format: 010-1234-5678</span>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Years of Coding Experience</label>
+
+                <div class="experience-row">
+                    <input
+                        type="range"
+                        id="experience"
+                        min="0"
+                        max="20"
+                        value="0"
+                    >
+
+                    <output class="experience-value" id="experienceValue">
+                        0 years
+                    </output>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="terms">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">
+                I agree to the terms and conditions.
+            </label>
+        </div>
+
+        <button type="submit">✿ Register Now</button>
+
+        <div
+            class="message"
+            id="message"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+    </form>
+
+    <footer>Made with ♡ and a little sparkle</footer>
+
+    <span class="decoration" style="bottom:12px;right:20px;">✦ ❀</span>
+
+</main>
+
+<script>
+const experience = document.getElementById("experience");
+const experienceValue = document.getElementById("experienceValue");
+const form = document.getElementById("registrationForm");
+const message = document.getElementById("message");
+const dob = document.getElementById("dob");
+
+// Do not allow a future date of birth.
+dob.max = new Date().toISOString().split("T")[0];
+
+experience.addEventListener("input", function () {
+    const years = Number(experience.value);
+    experienceValue.textContent =
+        years + (years === 1 ? " year" : " years");
+});
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    const birthDate = new Date(dob.value + "T00:00:00");
+
+    if (birthDate > new Date()) {
+        message.textContent = "Please select a valid date of birth.";
+        return;
+    }
+
+    message.textContent =
+        "Registration form completed successfully! ♡ " +
+        "Your information passed validation. This demo does not save or submit your data to a university.";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Registration</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:25px;background:#fffcfe;color:#593c59;font-family:Arial,sans-serif}
+form{max-width:650px;margin:20px auto;padding:30px;background:#fbf5fc;border:2px solid #dfc4ed;border-radius:25px;box-shadow:0 15px 35px #70457515}
+h1{text-align:center;font-family:Georgia,serif;font-size:32px}
+p{text-align:center;color:#92788f}
+fieldset{border:1px solid #dfc4ed;border-radius:15px;padding:20px;margin:20px 0;background:#fffafd}
+legend{color:#805d85;font-weight:bold}
+label{display:block;margin:14px 0 7px}
+input:not([type=checkbox]):not([type=range]),select{width:100%;padding:12px;border:1px solid #dfc4ed;border-radius:10px;background:#fffafd;font-size:15px}
+input[type=range]{accent-color:#bd91c9}
+button{width:100%;padding:13px;border:0;border-radius:15px;background:#e3b9d6;color:#593c59;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+#msg{color:#805d85}
+</style>
+</head>
+<body>
+<form id="form">
+<h1>Student Registration ♡</h1>
+<p>Please complete all required fields correctly.</p>
+
+<fieldset><legend>Personal Information</legend>
+<label>Full Name *</label><input id="name" required>
+<label>Student ID *</label><input id="sid" pattern="[0-9]{9}" placeholder="9 digits" required>
+<label>Date of Birth</label><input id="dob" type="date">
+<label>Major *</label>
+<select id="major" required>
+<option value="">Select your major</option>
+<option>Computer Engineering</option>
+<option>Software Engineering</option>
+<option>Artificial Intelligence</option>
+<option>Business Administration</option>
+<option>Other</option>
+</select>
+</fieldset>
+
+<fieldset><legend>Account Information</legend>
+<label>Email *</label><input id="email" type="email" placeholder="example@email.com" required>
+<label>Password *</label><input id="pass" type="password" minlength="8" placeholder="At least 8 characters" required>
+<label>Confirm Password *</label><input id="confirm" type="password" required>
+<label>Phone Number</label><input id="phone" type="tel" placeholder="010-1234-5678" pattern="010-[0-9]{4}-[0-9]{4}">
+</fieldset>
+
+<label>Years of Coding Experience: <span id="years">0</span> years</label>
+<input id="exp" type="range" min="0" max="20" value="0">
+
+<p><label><input id="terms" type="checkbox" required> I agree to the terms and conditions *</label></p>
+<button id="submit" disabled>Submit Registration</button>
+<p id="msg"></p>
+</form>
+
+<script>
+const $=id=>document.getElementById(id), form=$("form");
+$("dob").max=new Date().toLocaleDateString("en-CA");
+
+function check(){
+ $("years").textContent=$("exp").value;
+ const phone=$("phone").value;
+ const valid=form.checkValidity() &&
+ $("pass").value===$("confirm").value &&
+ (!phone||/^010-\d{4}-\d{4}$/.test(phone)) &&
+ (!$("dob").value||$("dob").value<=$("dob").max);
+ $("submit").disabled=!valid;
+ return valid;
+}
+form.addEventListener("input",check);
+form.addEventListener("change",check);
+form.onsubmit=e=>{
+ e.preventDefault();
+ $("msg").textContent=check()
+ ? "Form validated successfully! ♡ (Demo only; data is not saved.)"
+ : "Please check your information and try again.";
+};
+</script>
+</body>
+</html>
