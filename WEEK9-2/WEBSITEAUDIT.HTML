@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A performance audit report for Flower Diary using Google Lighthouse.">
+    <title>Website Performance Audit | Flower Diary</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf8fc;
+            color: #45404d;
+            line-height: 1.7;
+            padding: 30px 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 45px 25px;
+            background: linear-gradient(135deg, #f5e9f7, #fcecf1);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: Georgia, serif;
+            color: #785b85;
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: #776c7b;
+        }
+
+        .section {
+            background: white;
+            padding: 28px;
+            margin-bottom: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(120, 91, 133, 0.07);
+        }
+
+        h2 {
+            font-family: Georgia, serif;
+            color: #866792;
+            margin-bottom: 15px;
+            font-size: 23px;
+        }
+
+        h3 {
+            color: #9b789f;
+            margin: 18px 0 8px;
+            font-size: 17px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 22px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .scores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .score {
+            text-align: center;
+            background: #f8f1fa;
+            padding: 20px 10px;
+            border-radius: 14px;
+        }
+
+        .score strong {
+            display: block;
+            font-size: 30px;
+            color: #82618e;
+        }
+
+        .score span {
+            font-size: 14px;
+            color: #716777;
+        }
+
+        .metrics {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .metrics th,
+        .metrics td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee5f0;
+        }
+
+        .metrics th {
+            background: #f7eff9;
+            color: #785b85;
+        }
+
+        .note {
+            background: #fff7f8;
+            border-left: 4px solid #d8a9c1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .highlight {
+            color: #82618e;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #8b8190;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .scores {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics th,
+            .metrics td {
+                padding: 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>✿ Website Performance Audit</h1>
+        <p>Flower Diary — Website Improvement Report</p>
+        <p>Using Google Lighthouse</p>
+    </header>
+
+    <section class="section">
+        <h2>1. Introduction</h2>
+
+        <p>
+            This report presents a performance audit of my website,
+            Flower Diary, using Google Lighthouse. The purpose of this
+            audit was to evaluate how efficiently the website loads and
+            identify possible areas for improvement.
+        </p>
+
+        <p>
+            I tested the website using Chrome Lighthouse and compared
+            the initial result with a later test performed in Incognito
+            mode. This helped me understand how the testing environment
+            can affect Lighthouse scores.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>2. Initial Performance Results</h2>
+
+        <p>
+            In my first Lighthouse test, Flower Diary received a
+            performance score of 82 out of 100.
+        </p>
+
+        <div class="scores">
+            <div class="score">
+                <strong>82</strong>
+                <span>Performance</span>
+            </div>
+
+            <div class="score">
+                <strong>100</strong>
+                <span>Accessibility</span>
+            </div>
+
+            <div class="score">
+                <strong>90</strong>
+                <span>SEO</span>
+            </div>
+        </div>
+
+        <h3>Initial Performance Metrics</h3>
+
+        <table class="metrics">
+            <tr>
+                <th>Metric</th>
+                <th>Initial Result</th>
+            </tr>
+            <tr>
+                <td>First Contentful Paint (FCP)</td>
+                <td>0.2 seconds</td>
+            </tr>
+            <tr>
+                <td>Largest Contentful Paint (LCP)</td>
+                <td>0.2 seconds</td>
+            </tr>
+            <tr>
+                <td>Total Blocking Time (TBT)</td>
+                <td>420 ms</td>
+            </tr>
+            <tr>
+                <td>Cumulative Layout Shift (CLS)</td>
+                <td>0</td>
+            </tr>
+        </table>
+
+        <div class="note">
+            Lighthouse displayed a warning that Chrome extensions
+            could negatively affect the performance test. Therefore,
+            the initial score may not represent the website's
+            performance under clean testing conditions.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>3. Issues Identified</h2>
+
+        <p>
+            The initial test showed a Total Blocking Time of 420 ms.
+            This was the main metric that stood out compared with the
+            other recorded loading metrics.
+        </p>
+
+        <p>
+            However, Lighthouse also warned that browser extensions
+            might affect the result. Because of this, I could not
+            confidently identify the 420 ms blocking time as a problem
+            caused by my website's code.
+        </p>
+
+        <p>
+            The later Incognito test helped me check the website
+            without the same browser extension environment.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>4. Improvements and Testing</h2>
+
+        <p>
+            Instead of making unnecessary changes to the website,
+            I repeated the Lighthouse test in Incognito mode.
+            This provided a cleaner testing environment and helped
+            me check whether the first result was affected by
+            browser extensions.
+        </p>
+
+        <p>
+            I also improved the website's SEO by adding a meta
+            description to the HTML head section after identifying
+            that it was missing in the initial SEO audit.
+        </p>
+
+        <p>
+            The meta description improvement was related to SEO,
+            not a confirmed performance optimization.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>5. Final Lighthouse Results</h2>
+
+        <p>
+            After testing the website again in Incognito mode,
+            Lighthouse reported a score of 100 in all three
+            categories.
+        </p>
+
+        <div class="scores">
+            <div class="score">
+                <strong>100</strong>
+                <span>Performance</span>
+            </div>
+
+            <div class="score">
+                <strong>100</strong>
+                <span>Accessibility</span>
+            </div>
+
+            <div class="score">
+                <strong>100</strong>
+                <span>SEO</span>
+            </div>
+        </div>
+
+        <p style="margin-top: 18px;">
+            These results show that Flower Diary achieved excellent
+            Lighthouse scores in the final test.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>6. What I Learned</h2>
+
+        <ul>
+            <li>
+                Lighthouse scores can be affected by the browser
+                environment and installed extensions.
+            </li>
+            <li>
+                Testing in Incognito mode can help reduce interference
+                from browser extensions.
+            </li>
+            <li>
+                Performance, accessibility, and SEO measure different
+                aspects of a website.
+            </li>
+            <li>
+                It is important to understand the actual audit results
+                before changing website code.
+            </li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>7. Conclusion</h2>
+
+        <p>
+            Through this performance audit, I learned how to use
+            Google Lighthouse to evaluate my website and understand
+            its performance results.
+        </p>
+
+        <p>
+            Flower Diary achieved a final Lighthouse score of
+            <span class="highlight">100 in Performance, Accessibility,
+            and SEO</span> during the Incognito test.
+        </p>
+
+        <p>
+            This audit also taught me that testing conditions matter
+            when evaluating a website. Overall, the process helped
+            me better understand website quality and the importance
+            of testing before making improvements.
+        </p>
+    </section>
+
+    <footer>
+        <p>✿ Flower Diary | Website Performance Audit ✿</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
