@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jharna Magar's Computer Engineering student portfolio, featuring web programming assignments, projects, skills, and learning progress.">
+<title>Jharna Magar | Portfolio</title>
+
+<style>
+:root {
+    --purple: #68468f;
+    --deep: #382253;
+    --lavender: #eee5fa;
+    --pink: #f6e5f1;
+    --white: #fffaff;
+    --text: #453653;
+    --muted: #81748c;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+    background: linear-gradient(135deg, #fdf8ff, #eee5fa);
+    line-height: 1.7;
+}
+
+header {
+    padding: 18px 8%;
+    background: rgba(255, 250, 255, 0.9);
+    border-bottom: 1px solid #e2d2ef;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 23px;
+    color: var(--purple);
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: var(--deep);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #a276b5;
+}
+
+.hero {
+    text-align: center;
+    padding: 95px 20px 85px;
+}
+
+.hero .intro {
+    color: var(--purple);
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(44px, 7vw, 72px);
+    color: var(--deep);
+    margin: 12px 0;
+}
+
+.hero h3 {
+    letter-spacing: 3px;
+    font-size: 15px;
+    color: var(--purple);
+}
+
+.hero p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.8;
+    color: #756580;
+}
+
+.hero a,
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 27px;
+    background: var(--purple);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.hero a:hover,
+.button:hover {
+    background: var(--deep);
+    transform: translateY(-2px);
+}
+
+main {
+    max-width: 1050px;
+    margin: auto;
+    padding: 20px;
+}
+
+.section {
+    background: var(--white);
+    border: 1px solid #e2d2ef;
+    border-radius: 22px;
+    padding: 38px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 30px rgba(80, 50, 110, 0.07);
+    scroll-margin-top: 100px;
+}
+
+.section-title {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    color: var(--deep);
+    margin: 0 0 12px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin: 0 auto 28px;
+    max-width: 600px;
+}
+
+.about-text {
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* SKILLS */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.skill-card {
+    padding: 20px;
+    background: #f7f0fb;
+    border: 1px solid #e7d9f1;
+    border-radius: 15px;
+}
+
+.skill-card h3 {
+    color: var(--deep);
+    margin: 0 0 5px;
+    font-size: 18px;
+}
+
+.skill-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 12px;
+}
+
+.skill-track {
+    height: 7px;
+    background: #e5d9ed;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, #9b79b4, #d4a8cc);
+    border-radius: 20px;
+}
+
+.level-label {
+    display: block;
+    margin-top: 8px;
+    color: var(--purple);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* PROJECTS */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.project-card {
+    padding: 25px;
+    border: 1px solid #e5d8ef;
+    border-radius: 17px;
+    background: linear-gradient(145deg, #f8f1fc, #fff7fb);
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(80, 50, 110, 0.09);
+}
+
+.project-number {
+    color: #a17bb1;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.project-card h3 {
+    color: var(--deep);
+    font-family: Georgia, serif;
+    font-size: 22px;
+    margin: 8px 0;
+}
+
+.project-card p {
+    color: #756b7c;
+    font-size: 14px;
+}
+
+.project-tag {
+    display: inline-block;
+    padding: 5px 11px;
+    margin: 5px 4px 0 0;
+    background: #eee5fa;
+    border-radius: 20px;
+    color: var(--purple);
+    font-size: 12px;
+}
+
+/* PROGRESS */
+
+.timeline {
+    max-width: 750px;
+    margin: auto;
+    border-left: 2px solid #dfc9ed;
+    padding-left: 25px;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 0 25px 10px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -33px;
+    top: 7px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #a783bd;
+    border: 3px solid #f3eafa;
+}
+
+.timeline-item h3 {
+    margin: 0 0 5px;
+    color: var(--deep);
+    font-size: 18px;
+}
+
+.timeline-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ASSIGNMENTS */
+
+.work h2 {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 34px;
+    color: var(--deep);
+    margin: 0 0 28px;
+}
+
+details {
+    margin-bottom: 12px;
+    border: 1px solid #dfcef1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f0e8fa;
+}
+
+summary {
+    cursor: pointer;
+    padding: 19px 24px;
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--deep);
+    background: #eee5fa;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: "+";
+    font-size: 25px;
+    color: var(--purple);
+}
+
+details[open] summary::after {
+    content: "−";
+}
+
+summary:hover {
+    background: #e4d5f3;
+}
+
+.assignments {
+    padding: 12px 25px 20px;
+    background: #fffaff;
+}
+
+.assignments a {
+    display: block;
+    padding: 10px 5px;
+    color: var(--purple);
+    text-decoration: none;
+    border-bottom: 1px solid #eee5f5;
+}
+
+.assignments a:hover {
+    color: var(--deep);
+    padding-left: 12px;
+}
+
+/* REFLECTION */
+
+.reflection {
+    background: linear-gradient(135deg, #f3eafa, #fceef5);
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+}
+
+.reflection p {
+    max-width: 720px;
+    margin: auto;
+    color: #65556f;
+    font-family: Georgia, serif;
+    font-size: 17px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    color: var(--purple);
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+@media (max-width: 650px) {
+    header {
+        padding: 16px 5%;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 13px;
+    }
+
+    .hero {
+        padding: 65px 15px;
+    }
+
+    .section {
+        padding: 23px 17px;
+    }
+
+    .skills-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    summary {
+        font-size: 16px;
+        padding: 16px;
+    }
+
+    .section-title {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <span class="logo">&lt;/&gt; Jharna</span>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#progress">Progress</a>
+            <a href="#my-work">Assignments</a>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <p class="intro">WELCOME TO MY PORTFOLIO</p>
+
+    <h1>Jharna Magar</h1>
+
+    <h3>COMPUTER ENGINEERING STUDENT</h3>
+
+    <p>
+        Learning, creating and growing<br>
+        one project at a time.
+    </p>
+
+    <a href="#my-work">Explore My Work ↓</a>
+</section>
+
+<main>
+
+<!-- ABOUT ME -->
+
+<section class="section" id="about">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">A little introduction</p>
+
+    <div class="about-text">
+        <p>
+            Hello! I'm Jharna Magar, a Computer Engineering student
+            interested in web development and technology.
+        </p>
+
+        <p>
+            Through my web programming course, I have been learning
+            how to build websites using HTML, CSS and JavaScript.
+            I enjoy exploring new ideas, improving my coding skills
+            and turning what I learn into practical projects.
+        </p>
+
+        <p>
+            This portfolio is a collection of my assignments,
+            projects and progress throughout my learning journey.
+        </p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+
+<section class="section" id="skills">
+    <h2 class="section-title">My Skills</h2>
+    <p class="section-subtitle">
+        Technologies and tools I have been learning
+    </p>
+
+    <div class="skills-grid">
+
+        <div class="skill-card">
+            <h3>HTML</h3>
+            <p>Building webpage structures and content.</p>
+            <div class="skill-track">
+                <div class="skill-level" style="width: 75%;"></div>
+            </div>
+            <span class="level-label">Learning and Practising</span>
+        </div>
+
+        <div class="skill-card">
+            <h3>CSS</h3>
+            <p>Styling websites, layouts and responsive designs.</p>
+            <div class="skill-track">
+                <div class="skill-level" style="width: 65%;"></div>
+            </div>
+            <span class="level-label">Learning and Practising</span>
+        </div>
+
+        <div class="skill-card">
+            <h3>JavaScript</h3>
+            <p>Learning basic interactions and website functionality.</p>
+            <div class="skill-track">
+                <div class="skill-level" style="width: 35%;"></div>
+            </div>
+            <span class="level-label">Beginner</span>
+        </div>
+
+        <div class="skill-card">
+            <h3>Python</h3>
+            <p>Developing basic programming knowledge.</p>
+            <div class="skill-track">
+                <div class="skill-level" style="width: 20%;"></div>
+            </div>
+            <span class="level-label">Beginner</span>
+        </div>
+
+        <div class="skill-card">
+            <h3>GitHub</h3>
+            <p>Uploading, organizing and publishing assignments.</p>
+            <div class="skill-track">
+                <div class="skill-level" style="width: 45%;"></div>
+            </div>
+            <span class="level-label">Learning and Practising</span>
+        </div>
+
+        <div class="skill-card">
+            <h3>Web Accessibility</h3>
+            <p>Learning to make websites easier for everyone to use.</p>
+            <div class="skill-track">
+                <div class="skill-level" style="width: 50%;"></div>
+            </div>
+            <span class="level-label">Learning and Practising</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROJECTS -->
+
+<section class="section" id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-subtitle">
+        Some of the work I have created during my learning journey
+    </p>
+
+    <div class="projects-grid">
+
+        <div class="project-card">
+            <span class="project-number">PROJECT 01</span>
+            <h3>Flower Diary</h3>
+            <p>
+                A flower-themed website where visitors can discover
+                different flowers, explore their meanings and learn
+                about flower care. I also worked on improving its
+                accessibility and SEO.
+            </p>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
+        </div>
+
+        <div class="project-card">
+            <span class="project-number">PROJECT 02</span>
+            <h3>Web Programming Portfolio</h3>
+            <p>
+                My personal portfolio website, created to organize
+                my weekly assignments, showcase projects and present
+                my progress as a Computer Engineering student.
+            </p>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">Responsive Design</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- MY PROGRESS -->
+
+<section class="section" id="progress">
+    <h2 class="section-title">My Learning Progress</h2>
+    <p class="section-subtitle">
+        How my web programming journey has developed
+    </p>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <h3>Week 2 — Getting Started with HTML</h3>
+            <p>
+                Started learning the basics of HTML and creating
+                simple webpages using different elements.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 3 — Practising HTML</h3>
+            <p>
+                Practised more HTML exercises and learned how to
+                organize webpage content and structure.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 4 — Building Webpage Structure</h3>
+            <p>
+                Continued developing my understanding of HTML
+                through practical exercises.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 5 — More HTML Practice</h3>
+            <p>
+                Improved my understanding of webpage elements
+                through additional coding exercises.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 6 — Working with Web Data</h3>
+            <p>
+                Explored different webpage examples, including
+                country, flower, random user, random joke and
+                weather activities.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 7 — Search Functionality</h3>
+            <p>
+                Created a search project and started exploring
+                interactive website features.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 8 — CSS and Forms</h3>
+            <p>
+                Practised adding CSS, working with attributes
+                and creating login and registration forms.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 9 — Accessibility and Website Improvement</h3>
+            <p>
+                Worked on Flower Diary, learned about accessibility
+                and SEO, and used Google Lighthouse to evaluate
+                website quality.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Week 10 — Portfolio Development</h3>
+            <p>
+                Improved my personal portfolio by adding an
+                introduction, technical skills, featured projects
+                and a learning progress timeline.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ASSIGNMENTS -->
+
+<section class="section work" id="my-work">
+    <h2>My Weekly Assignments</h2>
+    <p class="section-subtitle">
+        Explore my coursework and practical exercises
+    </p>
+
+    <details>
+        <summary>Week 2</summary>
+        <div class="assignments">
+            <a href="WEEK2/EXERCISE1.html">Exercise 1</a>
+            <a href="WEEK2/EXERCISE2.html">Exercise 2</a>
+            <a href="WEEK2/EXERCISE3.html">Exercise 3</a>
+            <a href="WEEK2/EXERCISE4.html">Exercise 4</a>
+            <a href="WEEK2/EXERCISE5.html">Exercise 5</a>
+            <a href="WEEK2/EXERCISE6.html">Exercise 6</a>
+            <a href="WEEK2/EXERCISE7.html">Exercise 7</a>
+            <a href="WEEK2/EXERCISE8.html">Exercise 8</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 2 Activity 2</summary>
+        <div class="assignments">
+            <a href="WEEK2-1/EXERCISE1.HTML">Exercise 1</a>
+            <a href="WEEK2-1/EXERCISE2.HTML">Exercise 2</a>
+            <a href="WEEK2-1/EXERCISE3.HTML">Exercise 3</a>
+            <a href="WEEK2-1/EXERCISE4.HTML">Exercise 4</a>
+            <a href="WEEK2-1/EXERCISE5.HTML">Exercise 5</a>
+            <a href="WEEK2-1/EXERCISE6.HTML">Exercise 6</a>
+            <a href="WEEK2-1/EXERCISE7.HTML">Exercise 7</a>
+            <a href="WEEK2-1/EXERCISE8.HTML">Exercise 8</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 3 – Part 1</summary>
+        <div class="assignments">
+            <a href="WEEK3-1/EXERCISE1.html">Exercise 1</a>
+            <a href="WEEK3-1/EXERCISE2.html">Exercise 2</a>
+            <a href="WEEK3-1/EXERCISE3.html">Exercise 3</a>
+            <a href="WEEK3-1/EXERCISE4.HTML">Exercise 4</a>
+            <a href="WEEK3-1/EXERCISE5.HTML">Exercise 5</a>
+            <a href="WEEK3-1/EXERCISE6.HTML">Exercise 6</a>
+            <a href="WEEK3-1/EXERCISE7.HTML">Exercise 7</a>
+            <a href="WEEK3-1/EXERCISE8.HTML">Exercise 8</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 3 – Part 2</summary>
+        <div class="assignments">
+            <a href="WEEK3-2/EXERCISE1.HTML">Exercise 1</a>
+            <a href="WEEK3-2/EXERCISE2.HTML">Exercise 2</a>
+            <a href="WEEK3-2/ECERISE3.HTML">Exercise 3</a>
+            <a href="WEEK3-2/EXERCISE4.HTML">Exercise 4</a>
+            <a href="WEEK3-2/EXERCISE5.HTML">Exercise 5</a>
+            <a href="WEEK3-2/EXERCISE6.HTML">Exercise 6</a>
+            <a href="WEEK3-2/EXERCISE7.HTML">Exercise 7</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 4</summary>
+        <div class="assignments">
+            <a href="WEEK4/EXERCISE1.HTML">Exercise 1</a>
+            <a href="WEEK4/EXERCISE2.HTML">Exercise 2</a>
+            <a href="WEEK4/EXERCISE3.HTML">Exercise 3</a>
+            <a href="WEEK4/EXERCISE4.HTML">Exercise 4</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 5</summary>
+        <div class="assignments">
+            <a href="WEEK5/EXERCISE1.HTML">Exercise 1</a>
+            <a href="WEEK5/EXERCISE2.HTML">Exercise 2</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 6</summary>
+        <div class="assignments">
+            <a href="WEEK6/COUNTRY.HTML">Country</a>
+            <a href="WEEK6/FLOWER.HTML">Flower</a>
+            <a href="WEEK6/PLACEHOLDER.HTML">Placeholder</a>
+            <a href="WEEK6/RANDOMUSER.HTML">Random User</a>
+            <a href="WEEK6/RANDOMJOKE.HTML">Random Joke</a>
+            <a href="WEEK6/WEATHER.HTML">Weather</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 7</summary>
+        <div class="assignments">
+            <a href="WEEK7/SEARCH.HTML">Search Project</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 8</summary>
+        <div class="assignments">
+            <a href="WEEK8/ADDINGCSS.HTML">Adding CSS</a>
+            <a href="WEEK8/ARTIBUTES.HTML">Attributes</a>
+            <a href="WEEK8/LOGINFORM.HTML">Login Form</a>
+            <a href="WEEK8/REGISTRATION.HTML">Registration</a>
+            <a href="WEEK8/UPGRADEDREGISTRATION.HTML">Upgraded Registration</a>
+        </div>
+    </details>
+
+    <details>
+        <summary>Week 9</summary>
+        <div class="assignments">
+            <a href="WEEK9/ACCESSIBILITY.HTML">Accessibility Project</a>
+        </div>
+    </details>
+
+</section>
+
+<!-- REFLECTION -->
+
+<section class="section" id="reflection">
+    <h2 class="section-title">What I Have Learned</h2>
+
+    <div class="reflection">
+        <p>
+            My web programming journey has helped me move from
+            writing basic HTML exercises to creating and improving
+            complete websites. I have learned how HTML, CSS and
+            JavaScript work together, explored website accessibility
+            and SEO, and gained experience publishing my work online.
+            I am still learning, but every assignment has helped me
+            become more confident and motivated to improve.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <p>Designed and created by Jharna Magar ♡</p>
+    <p>Computer Engineering Student | Web Programming Portfolio</p>
+</footer>
+
+</body>
+</html>
