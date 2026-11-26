@@ -1,0 +1,861 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="A website improvement report for Flower Diary, covering performance, accessibility, SEO, and Lighthouse testing results.">
+
+<title>Flower Diary | Website Improvements Report</title>
+
+<style>
+:root {
+  --pink: #f5dce9;
+  --pink-soft: #fff1f7;
+  --lavender: #e9e2f8;
+  --purple: #70568f;
+  --purple-dark: #493b55;
+  --text: #51465a;
+  --paper: #fffafd;
+  --white: #ffffff;
+  --green: #23865d;
+  --line: #eadfed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--paper);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+a {
+  color: #62457f;
+}
+
+a:focus, button:focus {
+  outline: 3px solid #805bb0;
+  outline-offset: 4px;
+}
+
+/* Skip link */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 10;
+  background: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+/* Header */
+
+header {
+  background: linear-gradient(
+    120deg,
+    var(--pink),
+    var(--lavender)
+  );
+
+  padding: 18px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  color: var(--purple);
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Hero */
+
+.hero {
+  text-align: center;
+  padding: 76px 20px 68px;
+
+  background: linear-gradient(
+    135deg,
+    #fff5fa,
+    #f0eaff
+  );
+}
+
+.eyebrow {
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .78rem;
+  font-weight: bold;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, serif;
+  color: var(--purple-dark);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  margin: 10px auto 16px;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  margin-top: 0;
+}
+
+.hero p {
+  max-width: 760px;
+  margin: 0 auto 24px;
+  font-size: 1.08rem;
+}
+
+.button {
+  display: inline-block;
+  background: var(--purple);
+  color: white;
+  text-decoration: none;
+  padding: 11px 22px;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+/* Main content */
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 22px 70px;
+}
+
+section {
+  padding: 42px 0;
+  scroll-margin-top: 20px;
+}
+
+.section-intro {
+  max-width: 780px;
+  margin-top: -8px;
+}
+
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 6px 22px #d8c9e426;
+}
+
+.soft-panel {
+  background: var(--pink-soft);
+}
+
+/* Lighthouse scores */
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.score {
+  text-align: center;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 10px;
+}
+
+.score strong {
+  display: block;
+  color: var(--green);
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+
+.score span {
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+/* Tables */
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  background: #f6effc;
+  color: var(--purple-dark);
+}
+
+/* Screenshots */
+
+figure {
+  margin: 22px 0;
+}
+
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+}
+
+figcaption {
+  font-size: .9rem;
+  color: #6d6175;
+  margin-top: 8px;
+}
+
+/* Two columns */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Labels and code */
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #e8f5ee;
+  color: #216b4b;
+  font-size: .82rem;
+  font-weight: bold;
+}
+
+code {
+  background: #f4eef8;
+  padding: 2px 5px;
+  border-radius: 5px;
+  overflow-wrap: anywhere;
+}
+
+pre {
+  background: #30283a;
+  color: #fff7ff;
+  padding: 16px;
+  border-radius: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.note {
+  border-left: 4px solid #b28bc9;
+  padding: 12px 16px;
+  background: #f8f2fb;
+  border-radius: 0 10px 10px 0;
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  padding: 28px 18px;
+  background: var(--lavender);
+}
+
+/* Responsive design */
+
+@media (max-width: 700px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .score-grid,
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .panel {
+    padding: 19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">
+  Skip to main content
+</a>
+
+<header>
+
+  <a class="brand" href="#top">
+    🌷 Flower Diary
+  </a>
+
+  <nav aria-label="Report navigation">
+    <a href="#overview">Overview</a>
+    <a href="#performance">Performance</a>
+    <a href="#accessibility">Accessibility</a>
+    <a href="#seo">SEO</a>
+    <a href="#results">Results</a>
+  </nav>
+
+</header>
+
+<!-- HERO -->
+
+<div class="hero" id="top">
+
+  <div class="eyebrow">
+    Website Improvement Project
+  </div>
+
+  <h1>
+    Flower Diary
+    <br>
+    Website Improvements Report
+  </h1>
+
+  <p>
+    This report describes the testing and improvements
+    made to Flower Diary. It focuses on website
+    performance, accessibility, and search engine
+    optimization (SEO), using Google Lighthouse
+    results as evidence.
+  </p>
+
+  <a class="button" href="#results">
+    View Final Results
+  </a>
+
+</div>
+
+<main id="main">
+
+<!-- 01 INTRODUCTION -->
+
+<section id="overview">
+
+  <div class="eyebrow">
+    01 · Introduction
+  </div>
+
+  <h2>About the Project</h2>
+
+  <p class="section-intro">
+    Flower Diary is a small flower-discovery website.
+    Visitors can explore a collection of flowers,
+    read about their meanings and care, and search
+    for a flower by name.
+
+    The design uses soft pink and lavender colors,
+    rounded cards, and simple navigation.
+  </p>
+
+  <figure>
+    <img
+      src="assets/flower-diary-homepage.png"
+      alt="Flower Diary homepage with pastel navigation and flower introduction."
+    >
+
+    <figcaption>
+      Figure 1. Screenshot of the Flower Diary homepage.
+    </figcaption>
+  </figure>
+
+  <div class="panel">
+
+    <h3>Project Goals</h3>
+
+    <ul>
+      <li>
+        Make the website load quickly and behave smoothly.
+      </li>
+
+      <li>
+        Make the content easier to navigate using
+        accessible HTML features.
+      </li>
+
+      <li>
+        Help search engines understand the page
+        through useful metadata.
+      </li>
+
+      <li>
+        Test the website and document the results
+        with Lighthouse.
+      </li>
+    </ul>
+
+  </div>
+
+</section>
+
+<!-- 02 PERFORMANCE -->
+
+<section id="performance">
+
+  <div class="eyebrow">
+    02 · Performance
+  </div>
+
+  <h2>Performance Testing and Improvement</h2>
+
+  <p class="section-intro">
+    The first Lighthouse run gave Flower Diary
+    a Performance score of 82.
+
+    The report also warned that Chrome extensions
+    negatively affected the page-load test.
+
+    To reduce that interference, the page was
+    tested again in a Chrome Incognito window.
+  </p>
+
+  <figure>
+    <img
+      src="assets/lighthouse-performance-metrics.png"
+      alt="Initial Lighthouse performance details and loading metrics."
+    >
+
+    <figcaption>
+      Figure 2. Initial performance metrics.
+      Total Blocking Time was 420 milliseconds.
+    </figcaption>
+  </figure>
+
+  <div class="panel">
+
+    <h3>What the First Test Showed</h3>
+
+    <ul>
+      <li>
+        First Contentful Paint (FCP):
+        0.2 seconds.
+      </li>
+
+      <li>
+        Largest Contentful Paint (LCP):
+        0.2 seconds.
+      </li>
+
+      <li>
+        Total Blocking Time (TBT):
+        420 milliseconds.
+      </li>
+
+      <li>
+        Cumulative Layout Shift (CLS):
+        0.
+      </li>
+    </ul>
+
+    <p class="note">
+      The first run's extension warning means the
+      score of 82 should not be treated as a direct
+      measure of the website alone.
+
+      The later Incognito run achieved 100.
+      The two runs were made under different
+      browser conditions, so the score change
+      should be interpreted with that limitation
+      in mind.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- 03 ACCESSIBILITY -->
+
+<section id="accessibility">
+
+  <div class="eyebrow">
+    03 · Accessibility
+  </div>
+
+  <h2>Accessibility Features</h2>
+
+  <p class="section-intro">
+    Flower Diary received an Accessibility score
+    of 100 in the initial Lighthouse test.
+
+    The page includes several features intended
+    to make navigation and content easier to use.
+  </p>
+
+  <div class="two-col">
+
+    <div class="panel">
+
+      <h3>Features in the HTML</h3>
+
+      <ul>
+        <li>
+          A skip link lets visitors jump to
+          the main content.
+        </li>
+
+        <li>
+          The navigation landmark has
+          an accessible label.
+        </li>
+
+        <li>
+          The flower search input has
+          a matching text label.
+        </li>
+
+        <li>
+          Flower emoji illustrations
+          have accessible names.
+        </li>
+
+        <li>
+          Visible focus outlines help
+          keyboard users see focus.
+        </li>
+
+        <li>
+          A status message is provided
+          when no flowers match a search.
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="panel soft-panel">
+
+      <h3>Example of the Skip Link</h3>
+
+      <pre><code>&lt;a class="skip-link" href="#main"&gt;
+  Skip to main content
+&lt;/a&gt;
+
+&lt;main id="main"&gt;
+  ...
+&lt;/main&gt;</code></pre>
+
+      <p>
+        This gives keyboard users a way to move
+        past repeated navigation links and reach
+        the main content.
+      </p>
+
+    </div>
+
+  </div>
+
+  <p>
+    The final Lighthouse summary also showed
+    an Accessibility score of 100.
+
+    A high automated score is useful evidence,
+    but it does not replace manual keyboard,
+    zoom, and screen-reader testing.
+  </p>
+
+</section>
+
+<!-- 04 SEO -->
+
+<section id="seo">
+
+  <div class="eyebrow">
+    04 · Search Engine Optimization
+  </div>
+
+  <h2>SEO Improvement</h2>
+
+  <p class="section-intro">
+    The initial SEO score was 90.
+
+    Lighthouse identified one issue:
+    the document did not have a meta description.
+  </p>
+
+  <figure>
+    <img
+      src="assets/lighthouse-seo-details.png"
+      alt="Initial Lighthouse SEO audit showing the missing meta description."
+    >
+
+    <figcaption>
+      Figure 3. Initial SEO audit identifying
+      the missing meta description.
+    </figcaption>
+  </figure>
+
+  <div class="panel">
+
+    <h3>Change Made</h3>
+
+    <p>
+      A descriptive meta tag was added inside
+      the document's head section:
+    </p>
+
+    <pre><code>&lt;meta name="description"
+content="Discover beautiful flowers,
+their meanings, and simple tips to care
+for them with Flower Diary."&gt;</code></pre>
+
+    <p>
+      This provides a short summary of the page
+      for search engines and other systems
+      that use page metadata.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- 05 RESULTS -->
+
+<section id="results">
+
+  <div class="eyebrow">
+    05 · Final Testing
+  </div>
+
+  <h2>Before and After Results</h2>
+
+  <p class="section-intro">
+    The final Lighthouse run was completed
+    in an Incognito window with Performance,
+    Accessibility, and SEO selected.
+  </p>
+
+  <div class="score-grid">
+
+    <div class="score">
+      <strong>100</strong>
+      <span>Performance</span>
+    </div>
+
+    <div class="score">
+      <strong>100</strong>
+      <span>Accessibility</span>
+    </div>
+
+    <div class="score">
+      <strong>100</strong>
+      <span>SEO</span>
+    </div>
+
+  </div>
+
+  <figure>
+    <img
+      src="assets/lighthouse-final-scores.png"
+      alt="Final Lighthouse report showing 100 in Performance, Accessibility, and SEO."
+    >
+
+    <figcaption>
+      Figure 4. Final Lighthouse results:
+      all three selected categories received
+      a score of 100.
+    </figcaption>
+  </figure>
+
+  <div class="panel table-wrap">
+
+    <h3>Score Comparison</h3>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Initial Score</th>
+          <th scope="col">Final Score</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <th scope="row">Performance</th>
+          <td>82</td>
+          <td>100</td>
+        </tr>
+
+        <tr>
+          <th scope="row">Accessibility</th>
+          <td>100</td>
+          <td>100</td>
+        </tr>
+
+        <tr>
+          <th scope="row">SEO</th>
+          <td>90</td>
+          <td>100</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <p class="note">
+      Note: The initial Performance run displayed
+      a Chrome-extension warning. The final run
+      was performed in Incognito.
+
+      Accessibility was 100 in the initial report
+      and 100 in the final combined report.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- 06 LEARNING -->
+
+<section id="learning">
+
+  <div class="eyebrow">
+    06 · Reflection
+  </div>
+
+  <h2>What I Learned</h2>
+
+  <div class="panel">
+
+    <ul>
+
+      <li>
+        How to use Lighthouse to test website
+        performance, accessibility, and SEO.
+      </li>
+
+      <li>
+        Why metadata such as a meta description
+        is useful.
+      </li>
+
+      <li>
+        How semantic HTML, labels, skip links,
+        and focus styles support accessibility.
+      </li>
+
+      <li>
+        Why test conditions, including browser
+        extensions, can affect audit results.
+      </li>
+
+      <li>
+        Why automated scores should be supported
+        by manual checks.
+      </li>
+
+    </ul>
+
+  </div>
+
+</section>
+
+<!-- 07 CONCLUSION -->
+
+<section id="conclusion">
+
+  <div class="eyebrow">
+    07 · Conclusion
+  </div>
+
+  <h2>Conclusion</h2>
+
+  <p class="section-intro">
+    The Flower Diary project was reviewed in
+    three areas: performance, accessibility,
+    and SEO.
+
+    The final Lighthouse report showed a score
+    of 100 in all three selected categories.
+
+    The work also highlighted the importance
+    of checking the testing environment and
+    combining automated audits with manual
+    accessibility checks.
+  </p>
+
+  <p>
+    <span class="tag">
+      Final Lighthouse Scores: 100 / 100 / 100
+    </span>
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+
+  <p>
+    🌷 Flower Diary · Website Improvements Report
+  </p>
+
+  <p>
+    Made with care for a more useful and
+    accessible web.
+  </p>
+
+</footer>
+
+</body>
+</html>
